@@ -16,7 +16,7 @@ public class DrawingFrame extends JFrame
 	{
 		super();
 		this.controller = controller;
-		basePanel = new DrawingPanel(controller);
+		basePanel = new DrawingPanel(controller, this);
 		setupFrame();
 	}
 	

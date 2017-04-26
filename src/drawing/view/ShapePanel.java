@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -19,7 +20,6 @@ public class ShapePanel extends JPanel
 	private ArrayList<Shape> ellipseList;
 	private ArrayList<Shape> polygonList;
 	private ArrayList<ArrayList<Shape>> shapes;
-	private DrawingPanel panel;
 	
 	public ShapePanel(Controller baseController)
 	{
@@ -31,7 +31,6 @@ public class ShapePanel extends JPanel
 		triangleList = new ArrayList<Shape>();
 		polygonList = new ArrayList<Shape>();
 		shapes = new ArrayList<ArrayList<Shape>>();
-		panel = new DrawingPanel(baseController);
 		
 		setupPanel();
 		buildShapes();
@@ -213,19 +212,38 @@ public class ShapePanel extends JPanel
 		this.repaint();
 	}
 	
+	public String selectPath(Component parent)
+	{
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
+		if(chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+		{
+			return chooser.getSelectedFile().getAbsolutePath();
+		}
+		
+		return null;
+		
+	}
+	
 	public void saveImage(String filePath, String fileName)
 	{
 		BufferedImage image = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB);
 		Graphics graphic = image.createGraphics();
-		this.paint(graphic);
+		
+		Color background = new Color(getBackground().getRed(), getBackground().getGreen(), getBackground().getBlue(),getBackground().getAlpha());
+		graphic.setColor(background);
+		graphic.fillRect(0, 0, this.getSize().width, this.getSize().height);
+		this.printAll(graphic);
 		graphic.dispose();
+		
 		try
 		{
 			ImageIO.write(image, "png", new File(filePath + fileName));
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
-			JOptionPane.showMessageDialog(panel, "Unable to write to the destination.");
+			JOptionPane.showMessageDialog(this, "Unable to write to the destination.");
 		}
 	}
 }
