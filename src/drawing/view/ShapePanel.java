@@ -231,9 +231,9 @@ public class ShapePanel extends JPanel
 		BufferedImage image = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB);
 		Graphics graphic = image.createGraphics();
 		
-		Color background = new Color(getBackground().getRed(), getBackground().getGreen(), getBackground().getBlue(),getBackground().getAlpha());
-		graphic.setColor(background);
-		graphic.fillRect(0, 0, this.getSize().width, this.getSize().height);
+//		Color background = new Color(getBackground().getRed(), getBackground().getGreen(), getBackground().getBlue(),getBackground().getAlpha());
+//		graphic.setColor(background);
+//		graphic.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		this.printAll(graphic);
 		graphic.dispose();
 		
@@ -243,7 +243,17 @@ public class ShapePanel extends JPanel
 		}
 		catch(IOException e)
 		{
+			//the perfect crime
 			JOptionPane.showMessageDialog(this, "Unable to write to the destination.");
 		}
+	}
+	
+	public void clearShapes()
+	{
+		for(int index = 0; index < shapes.size(); index++)
+		{
+			 shapes.get(index).clear();
+		}
+		this.repaint();
 	}
 }
