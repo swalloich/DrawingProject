@@ -121,36 +121,28 @@ public class DrawingPanel extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				String path = shapePanel.selectPath(shapePanel);
-				String temp = System.getProperty("file.separator");
-				if (!path.substring(path.length()).equalsIgnoreCase(temp))
+				if (path != null)
 				{
-					path += temp;
-					System.out.println(path);
+					String temp = System.getProperty("file.separator");
+					if (!path.substring(path.length()).equalsIgnoreCase(temp))
+					{
+						path += temp;
+						System.out.println(path);
+					}
 				}
-				
+
 				String name = JOptionPane.showInputDialog("Please enter a name for the file.");
-				if((name != null) && (name.length() > 0))
+				if ((name != null) && (name.length() > 0))
 				{
 					name = endWithPng(name);
-				
+
 					try
 					{
 						shapePanel.saveImage(path, name);
-					} 
-					catch (Exception error)
+					} catch (Exception error)
 					{
-					path = JOptionPane.showInputDialog("Invalid file path");
+						path = JOptionPane.showInputDialog("Invalid file path");
 					}
-				}
-				else
-				{
-					while((name == null))
-					{
-						name = JOptionPane.showInputDialog("Invalid file name");
-					}
-
-					name = endWithPng(name);
-					shapePanel.saveImage(path, name);
 				}
 			}
 		});
@@ -190,7 +182,7 @@ public class DrawingPanel extends JPanel
 				shapePanel.addPolygons();
 			}
 		});
-		
+
 		clear.addActionListener(new ActionListener()
 		{
 			@Override

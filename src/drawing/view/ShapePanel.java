@@ -182,6 +182,10 @@ public class ShapePanel extends JPanel
 		}
 		this.repaint();
 	}
+	public void drawLine(int startX, int startY, int endX, int endY)
+	{
+		
+	}
 	
 	public void addEllipses()
 	{
