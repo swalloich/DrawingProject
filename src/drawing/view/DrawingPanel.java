@@ -3,7 +3,6 @@ package drawing.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import drawing.controller.Controller;
@@ -202,7 +201,7 @@ public class DrawingPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{	
-				shapePanel.addGraphs();
+				shapePanel.addGraph();
 			}
 		});
 		

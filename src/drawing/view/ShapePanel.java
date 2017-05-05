@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import drawing.controller.Controller;
 
+@SuppressWarnings("serial")
 public class ShapePanel extends JPanel
 {
 	private Controller baseController;
@@ -266,14 +267,14 @@ public class ShapePanel extends JPanel
 		this.repaint();
 	}
 
-	public void addGraphs()
+	public void addGraph()
 	{
 		if (graphList.size() > 500)
 		{
 			graphList.clear();
 		}
 
-		int xCorner = (int) (Math.random() * this.getWidth() - 15);
+		int xCorner = (int) (Math.random() * this.getWidth() - 30);
 		int yCorner = (int) (Math.random() * this.getHeight() - 15);
 		int width = (int) (Math.random() * 120) + 1;
 		int count = 0;
